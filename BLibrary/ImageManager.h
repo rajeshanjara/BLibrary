@@ -1,4 +1,10 @@
 #pragma once
+#include "openjpeg-2.1\openjpeg.h"
+
+typedef enum
+{
+    PNG, JPG
+}IMAGE_e;
 
 class image
 {
@@ -26,5 +32,6 @@ class ImageManager
 public:
     ImageManager();
     ~ImageManager();
+    bool loadImage(LPCSTR lpcszFilename);
 };
 
