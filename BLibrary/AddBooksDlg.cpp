@@ -30,6 +30,7 @@ void AddBooksDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(AddBooksDlg, CDialogEx)
     ON_BN_CLICKED(IDCANCEL2, &AddBooksDlg::OnBnClickedCancel2)
     ON_BN_CLICKED(IDOK2, &AddBooksDlg::OnBnClickedOk2)
+    ON_BN_CLICKED(IDC_BROWSE_IMG, &AddBooksDlg::OnBnClickedBrowseImg)
 END_MESSAGE_MAP()
 
 
@@ -60,4 +61,16 @@ void AddBooksDlg::OnBnClickedOk2()
     GetDlgItem(IDC_EDIT6)->GetWindowText(str);
     m_stBooksDetails.address = W2A(str);
     CDialogEx::OnOK();
+}
+
+
+void AddBooksDlg::OnBnClickedBrowseImg()
+{
+    CFileDialog cfd(TRUE, L"jpg", L"JPEG Images", OFN_FILEMUSTEXIST,
+        L"Photo Files (*.jpg)|*.jpg|*.PNG||", this);
+    cfd.DoModal();
+    CString str = cfd.GetFolderPath() + _T( "\\" ) +cfd.GetFileName();
+    USES_CONVERSION;
+    m_stBooksDetails.filepath = W2A(str);
+    GetDlgItem(IDC_EDIT7)->SetWindowText(str);
 }

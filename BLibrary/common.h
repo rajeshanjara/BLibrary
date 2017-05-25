@@ -13,6 +13,7 @@ typedef struct BOOKS_INFO_tag
 	string year;
     string edition;
     string address;
+    string filepath;
 }BOOKS_INFO_t;
 
 

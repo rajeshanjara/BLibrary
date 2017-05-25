@@ -7,6 +7,7 @@
 #include "BLibraryDlg.h"
 #include "afxdialogex.h"
 #include "AddBooksDlg.h"
+#include "ImageManager.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -170,6 +171,9 @@ void CBLibraryDlg::OnBnClickedButton1()
         BOOKS_INFO_t stBooksDetails;
         dlg.GetBooksDetails( stBooksDetails );
         m_LibraryMgr.addBook( stBooksDetails );
+
+        ImageManager imagemgr;
+        imagemgr.loadImage(stBooksDetails.filepath.c_str());
     }
 }
 

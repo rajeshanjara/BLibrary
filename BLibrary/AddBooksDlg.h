@@ -36,4 +36,5 @@ private:
 public:
     afx_msg void OnBnClickedCancel2();
     afx_msg void OnBnClickedOk2();
+    afx_msg void OnBnClickedBrowseImg();
 };
