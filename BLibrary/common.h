@@ -17,4 +17,13 @@ typedef struct BOOKS_INFO_tag
 }BOOKS_INFO_t;
 
 
+class Utils
+{
+public:
+    static BOOL copyfile(LPCTSTR lpszSrc, LPCTSTR lpszDest)
+    {
+        return CopyFile(lpszSrc, lpszDest, FALSE);
+    }
+};
+
 #endif // _COMMON_H_
