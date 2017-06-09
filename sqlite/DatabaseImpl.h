@@ -22,7 +22,7 @@ namespace DataBase
         void add( int Id, T value );
         size_t size() { return m_ItemsMap.size(); }
         int getInt(int nIndex_i);
-        char* getString(int nIndex_i);
+        const char* getString(int nIndex_i);
         float getReal(int nIndex_i);
         byte* getBinary(int nIndex_i);
 

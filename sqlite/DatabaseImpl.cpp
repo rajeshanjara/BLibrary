@@ -75,7 +75,7 @@ int Record::getInt(int nIndex_i){
     }
     return val;
 }
-char* Record::getString(int nIndex_i){
+const char* Record::getString(int nIndex_i){
     char* ptr = 0;
     if( nIndex_i > -1 && nIndex_i + 1 <= m_ItemsMap.size())
     {
