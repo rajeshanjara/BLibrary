@@ -48,29 +48,39 @@ void AddBooksDlg::OnBnClickedOk2()
     clear();
     CString str;
     GetDlgItem( IDC_NAME_EDIT )->GetWindowText( str );
+    LPWSTR pstr = (LPWSTR)(LPCTSTR)str;
     USES_CONVERSION;
-    m_stBooksDetails.name = W2A(str);
+    m_stBooksDetails.name = W2A(pstr);
     GetDlgItem( IDC_AUTHOR_EDIT)->GetWindowText( str );
-    m_stBooksDetails.author = W2A(str);
+    pstr = (LPWSTR)(LPCTSTR)str;
+    m_stBooksDetails.author = W2A(pstr);
     GetDlgItem( IDC_PUBLISHER_EDIT )->GetWindowText( str );
-    m_stBooksDetails.publisher = W2A(str);
+    pstr = (LPWSTR)(LPCTSTR)str;
+    m_stBooksDetails.publisher = W2A(pstr);
     GetDlgItem(IDC_EDIT4)->GetWindowText(str);
-    m_stBooksDetails.year = W2A(str);
+    pstr = (LPWSTR)(LPCTSTR)str;
+    m_stBooksDetails.year = W2A(pstr);
     GetDlgItem(IDC_EDIT5)->GetWindowText(str);
-    m_stBooksDetails.edition = W2A(str);
+    pstr = (LPWSTR)(LPCTSTR)str;
+    m_stBooksDetails.edition = W2A(pstr);
     GetDlgItem(IDC_EDIT6)->GetWindowText(str);
-    m_stBooksDetails.address = W2A(str);
+    pstr = (LPWSTR)(LPCTSTR)str;
+    m_stBooksDetails.address = W2A(pstr);
+    GetDlgItem(IDC_EDIT7)->GetWindowText(str);
+    pstr = (LPWSTR)(LPCTSTR)str;
+    m_stBooksDetails.filepath = W2A(pstr);
     CDialogEx::OnOK();
 }
 
 
 void AddBooksDlg::OnBnClickedBrowseImg()
 {
-    CFileDialog cfd(TRUE, L"jpg", L"JPEG Images", OFN_FILEMUSTEXIST,
-        L"Photo Files (*.jpg)|*.jpg|*.PNG||", this);
+    CFileDialog cfd(TRUE, _T("jpg"), _T("JPEG Images"), OFN_FILEMUSTEXIST,
+        _T("Photo Files (*.jpg)|*.jpg|*.PNG||"), this);
     cfd.DoModal();
     CString str = cfd.GetFolderPath() + _T( "\\" ) +cfd.GetFileName();
     USES_CONVERSION;
-    m_stBooksDetails.filepath = W2A(str);
+    LPWSTR pstr = (LPWSTR)(LPCTSTR)str;
+    m_stBooksDetails.filepath = W2A(pstr);
     GetDlgItem(IDC_EDIT7)->SetWindowText(str);
 }

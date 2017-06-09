@@ -17,7 +17,7 @@ bool LibraryMgr::init()
     // init db
     RegistryMgr mgr;
     DWORD dwValue = 0;
-    mgr.readRegistry(L"ProductStatus", dwValue);
+    mgr.readRegistry(_T("ProductStatus"), dwValue);
     if (dwValue == 1)
     {
         m_adapter.openDB("");
@@ -25,7 +25,7 @@ bool LibraryMgr::init()
     else
     {
         // new App
-        mgr.writeRegistry(L"ProductStatus", 1 );
+        mgr.writeRegistry(_T("ProductStatus"), 1 );
         m_adapter.openDB("");
         char* ptr = NULL;
         // Remove old table if exists

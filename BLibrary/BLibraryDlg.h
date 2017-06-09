@@ -36,5 +36,6 @@ public:
     afx_msg void OnBnClickedButton2();
 
     LibraryMgr m_LibraryMgr;
-    ListViewer m_BoolsListCtrl;
+    ListViewer m_BooksListCtrl;
+    
 };

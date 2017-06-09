@@ -26,4 +26,14 @@ public:
     }
 };
 
+static const char* BOOK_TBL_COLUMS[] = {
+    {"Id"},
+    {"Name"},
+    { "Author" },
+    { "Publisher" },
+    { "Year" },
+    { "Edition" },
+    { "Address" }
+};
+
 #endif // _COMMON_H_

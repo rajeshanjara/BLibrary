@@ -14,8 +14,10 @@ public:
 	virtual ~ListViewer();
     void setRecordSet(RecordSet);
     void refresh();
-    void CreateHeader(Record columns);
+    void CreateHeader(/*Record columns*/);
     void FillRows(Record row);
+    void createimagelist();
+    void AddImage(Record& row);
 
 protected:
 	DECLARE_MESSAGE_MAP()
@@ -23,6 +25,7 @@ protected:
 private:
     RecordSet m_RecordSet;
     bool m_bColumnsCreated;
+    CImageList m_myImageList;
 };
 
 

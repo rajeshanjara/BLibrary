@@ -7,7 +7,6 @@
 #include "BLibraryDlg.h"
 #include "afxdialogex.h"
 #include "AddBooksDlg.h"
-#include "ImageManager.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -59,7 +58,7 @@ CBLibraryDlg::CBLibraryDlg(CWnd* pParent /*=NULL*/)
 void CBLibraryDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialogEx::DoDataExchange(pDX);
-    DDX_Control(pDX, IDC_LIST1, m_BoolsListCtrl);
+    DDX_Control(pDX, IDC_LIST1, m_BooksListCtrl);
 }
 
 BEGIN_MESSAGE_MAP(CBLibraryDlg, CDialogEx)
@@ -102,12 +101,20 @@ BOOL CBLibraryDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
+    DWORD dwStyle = m_BooksListCtrl.GetExtendedStyle();
+    dwStyle |= LVS_EX_FULLROWSELECT;
+    m_BooksListCtrl.SetExtendedStyle(dwStyle);
+
+    CFont font;
+    font.CreatePointFont(23, _T("Arial"));
+    m_BooksListCtrl.SetFont(&font);
+
     if (m_LibraryMgr.init())
     {
         m_LibraryMgr.fetchBooks();
         RecordSet recordset = m_LibraryMgr.getRecordSet();
-        m_BoolsListCtrl.setRecordSet(recordset);
-        m_BoolsListCtrl.refresh();
+        m_BooksListCtrl.setRecordSet(recordset);
+        m_BooksListCtrl.refresh();
     }
      
 	return TRUE;  // return TRUE  unless you set the focus to a control
@@ -171,16 +178,15 @@ void CBLibraryDlg::OnBnClickedButton1()
         BOOKS_INFO_t stBooksDetails;
         dlg.GetBooksDetails( stBooksDetails );
         m_LibraryMgr.addBook( stBooksDetails );
-
-        ImageManager imagemgr;
-        imagemgr.loadImage(stBooksDetails.filepath.c_str());
+        OnBnClickedButton2();
     }
 }
+
 
 void CBLibraryDlg::OnBnClickedButton2()
 {
     m_LibraryMgr.fetchBooks();
     RecordSet recordset = m_LibraryMgr.getRecordSet();
-    m_BoolsListCtrl.setRecordSet(recordset);
-    m_BoolsListCtrl.refresh();
+    m_BooksListCtrl.setRecordSet(recordset);
+    m_BooksListCtrl.refresh();
 }

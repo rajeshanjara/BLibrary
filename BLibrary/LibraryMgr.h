@@ -2,6 +2,8 @@
 #include "common.h"
 #include "BookValidator.h"
 #include "LibraryDBAdpter.h"
+#include "ImageManager.h"
+
 class LibraryMgr
 {
 public:
@@ -10,6 +12,7 @@ public:
     bool init();
     void addBook( BOOKS_INFO_t& book )
     {
+        book.filepath = ImageManager::instance().RelocateImages(book.filepath.c_str());
         BookValidator validator;
       //  validator.BookExists(book);
         char* pquery = query::InsertValues(book);
