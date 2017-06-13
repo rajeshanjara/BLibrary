@@ -16,6 +16,11 @@ public:
         return m_SqLiteIF.getRecordSet();
     }
 
+    std::string getErrorMsg()
+    {
+        return m_SqLiteIF.getErrorMsg();
+    }
+
 private:
     DatabaseIF m_SqLiteIF;
 };

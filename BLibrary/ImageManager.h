@@ -15,7 +15,7 @@ typedef enum
 
 typedef enum
 {
-    ICON, thumbnail
+    ICON, THUMBNAIL
 }IMAGE_TYPE_e;
 
 using namespace boost::gil;
@@ -85,9 +85,8 @@ public:
             CString rstr = str.Right(str.GetLength() - nPos - 1);
             return rstr;
         }
+        return NULL;
     }
-
-
 };
 
 class imagetype
@@ -126,6 +125,10 @@ class BLimage
 public:
     BLimage() {}
     BLimage(LPCSTR lpszFilePath) : m_lpszFilePath(lpszFilePath), m_hBitmap(0){}
+   /* ~BLimage() {
+        DeleteObject(m_hBitmap);
+        m_hBitmap = 0;
+    }*/
     HBITMAP getbitmap() { return m_hBitmap; }
     SIZE getimagesize() { return m_ImageType.getDimension(); }
     bool CreateImage(IMAGE_e e)
@@ -176,7 +179,12 @@ public:
                         ptr++;
                     }
                 }
-                m_hBitmap = createbitmap(pbyPixels);
+
+                HBITMAP hBitmap = createbitmap(pbyPixels);
+              //  if (NULL != hBitmap)
+              //      DeleteObject(m_hBitmap);
+                m_hBitmap = hBitmap;
+                delete [] pbyPixels;
                 break;
             }
         }
@@ -208,6 +216,7 @@ public:
             0);
  
         memcpy(pvBits, (VOID*)pbyPixels, size.cx*size.cy * 3);
+        DeleteObject(dc);
         /*FILE* fp = fopen("file.dat", "wb");
         if (fp)
         {
@@ -238,7 +247,16 @@ public:
 };
 
 class thumbnail : public imagetype
-{};
+{
+public:
+    SIZE getDimension()
+    {
+        SIZE s;
+        s.cx = 140;
+        s.cy = 150;
+        return s;
+    }
+};
 
 class normal : public imagetype
 {};
@@ -272,7 +290,7 @@ public:
     bool loadImage(LPCSTR lpcszFilename, T& image_o)
     {
         IMAGE_e type = imageutil::getExtension(lpcszFilename);
-        BLimage<icon> img(lpcszFilename);
+        T img(lpcszFilename);
         bool status = img.CreateImage(type);
         image_o = img;
         return true;

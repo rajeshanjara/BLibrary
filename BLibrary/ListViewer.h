@@ -1,6 +1,8 @@
 #pragma once
 #include "common.h"
 #include "../sqlite/DatabaseIF.h"
+#include "ThumbnailView.h"
+
 using namespace DataBase;
 
 // ListViewer
@@ -20,12 +22,21 @@ public:
     void AddImage(Record& row);
 
 protected:
-	DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CMyTreeView)
+    afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
+
+    afx_msg void OnContextMenu(CWnd*, CPoint point);
+    void ShowPopupMenu( CPoint& point );
 
 private:
     RecordSet m_RecordSet;
     bool m_bColumnsCreated;
     CImageList m_myImageList;
+    ThumbnailView* m_pThumbnailView;
+public:
+    afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
 
 

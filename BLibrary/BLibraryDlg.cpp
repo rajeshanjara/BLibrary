@@ -185,8 +185,14 @@ void CBLibraryDlg::OnBnClickedButton1()
 
 void CBLibraryDlg::OnBnClickedButton2()
 {
-    m_LibraryMgr.fetchBooks();
-    RecordSet recordset = m_LibraryMgr.getRecordSet();
-    m_BooksListCtrl.setRecordSet(recordset);
-    m_BooksListCtrl.refresh();
+    if (!m_LibraryMgr.fetchBooks())
+    {
+        MessageBoxA( m_hWnd, m_LibraryMgr.getErrorMsg().c_str(), "Error!", MB_OK );
+    }
+    else
+    {
+        RecordSet recordset = m_LibraryMgr.getRecordSet();
+        m_BooksListCtrl.setRecordSet(recordset);
+        m_BooksListCtrl.refresh();
+    }
 }

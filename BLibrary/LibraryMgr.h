@@ -14,7 +14,6 @@ public:
     {
         book.filepath = ImageManager::instance().RelocateImages(book.filepath.c_str());
         BookValidator validator;
-      //  validator.BookExists(book);
         char* pquery = query::InsertValues(book);
         m_adapter.executeQuery( pquery );
     }
@@ -22,13 +21,17 @@ public:
     bool fetchBooks()
     {
         char* ptr = query::fetchBookTable();
-        m_adapter.executeQuery( ptr );
-        return true;
+        return m_adapter.executeQuery( ptr );
     }
 
     RecordSet getRecordSet()
     {
         return m_adapter.getRecrdSet();
+    }
+
+    std::string getErrorMsg()
+    {
+        return m_adapter.getErrorMsg();
     }
 
 private:
